@@ -21,7 +21,7 @@ const App = () => {
 
     const getMessages = async () => {
 
-        console.log("Making API call.");
+        //console.log("Making API call.");
 
         const options = {
             method: "POST",
@@ -33,13 +33,13 @@ const App = () => {
             }
         }
 
-        console.log(options);
+        //console.log(options);
 
         try {
             const response = await fetch("/api/completions", options);
             const data = await response.json();
-            console.log(data);
-            console.log("API call complete.");
+            //console.log(data);
+            //console.log("API call complete.");
             setMessage(data.choices[0].message);
         } catch (error) {
             console.log("There was an error.");
@@ -48,7 +48,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        console.log(currentTitle, value, message);
+        //console.log(currentTitle, value, message);
         if(!currentTitle && value && message){
             setCurrentTitle(value);
         }
@@ -62,11 +62,11 @@ const App = () => {
         }
     }, [message, currentTitle])
 
-    console.log(previousChats);
+    //console.log(previousChats);
 
     const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle);
     const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)));
-    console.log(uniqueTitles);
+    //console.log(uniqueTitles);
 
   return (
       <div className="app">
