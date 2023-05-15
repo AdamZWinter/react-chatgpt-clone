@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 
-
 const App = () => {
 
     const [value, setValue] = useState(null);
@@ -77,7 +76,7 @@ const App = () => {
                   {uniqueTitles?.map((uniqueTitle, index) => <li key={index} onClick={ () => handleClick(uniqueTitle)}>{uniqueTitle}</li>)}
               </ul>
               <nav>
-                  <p>Made by Team 2sigma</p>
+                  <p>2Sigma ChatGPT Team</p>
               </nav>
           </section>
 
@@ -101,8 +100,7 @@ const App = () => {
                       <div id="submit" onClick={getMessages}>➢</div>
                   </div>
                   <p className="info">
-                      GPT 3.5 Turbo Model. Free Research Preview. Our goal is to make AI
-                      systems more natural and safe to interact with. Your feedback will help us improve.
+                      2Sigma React ChatGPT Clone. This app leverages OpenAI's API to interact with the GPT 3.5 Turbo Model. Your feedback will help us improve.
                   </p>
               </div>
           </section>
