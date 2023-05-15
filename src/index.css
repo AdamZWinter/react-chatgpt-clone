@@ -106,12 +106,13 @@ input:focus {
 }
 
 .feed {
-    overflow: scroll;
+    overflow: hidden;
     width: 100%;
     padding: 0;
 }
 
 .feed li {
+    overflow-y: scroll;
     display: flex;
     background-color: #444654;
     width: 100%;
