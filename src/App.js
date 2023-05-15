@@ -81,7 +81,7 @@ const App = () => {
           </section>
 
           <section className="main">
-              {!currentTitle && <h1>FakeGPT</h1>}
+              {!currentTitle && <h1>ChatGPT-Faux</h1>}
               <ul className="feed">
                 {currentChat?.map((chatMessage, index) => <li key={index}>
                     <p className="role">
