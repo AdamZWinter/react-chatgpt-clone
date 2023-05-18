@@ -38,9 +38,9 @@ const App = () => {
         try {
             const response = await fetch("/api/completions", options);
             const data = await response.json();
-            //console.log(data);
+            console.log(data);
             //console.log("API call complete.");
-            setMessage(data.choices[0].message);
+            setMessage(data);
         } catch (error) {
             console.log("There was an error.");
             console.error(error);
@@ -62,6 +62,14 @@ const App = () => {
         }
     }, [message, currentTitle])
 
+    useEffect(() => {
+        return () => {
+            fetch('/reset', { method: 'GET' })
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+        };
+    }, []);
+
     //console.log(previousChats);
 
     const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle);
@@ -81,7 +89,7 @@ const App = () => {
           </section>
 
           <section className="main">
-              {!currentTitle && <h1>FakeGPT</h1>}
+              {!currentTitle && <h1>ChatGPT-Faux</h1>}
               <ul className="feed">
                 {currentChat?.map((chatMessage, index) => <li key={index}>
                     <p className="role">

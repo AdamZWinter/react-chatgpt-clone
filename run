@@ -1,2 +1,2 @@
 #!/bin/bash
-PORT=3000 npm run start
+PORT=3001 npm run start
