@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 
 const App = () => {
 
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState("");
     const [message, setMessage] = useState(null);
     const [ previousChats, setPreviousChats] = useState([]);
     const [currentTitle, setCurrentTitle] = useState(null);
@@ -21,7 +21,7 @@ const App = () => {
 
     const getMessages = async () => {
 
-        console.log("Making API call.");
+        //console.log("Making API call.");
 
         const options = {
             method: "POST",
@@ -33,14 +33,14 @@ const App = () => {
             }
         }
 
-        console.log(options);
+        //console.log(options);
 
         try {
             const response = await fetch("/api/completions", options);
             const data = await response.json();
             console.log(data);
-            console.log("API call complete.");
-            setMessage(data.choices[0].message);
+            //console.log("API call complete.");
+            setMessage(data);
         } catch (error) {
             console.log("There was an error.");
             console.error(error);
@@ -48,7 +48,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        console.log(currentTitle, value, message);
+        //console.log(currentTitle, value, message);
         if(!currentTitle && value && message){
             setCurrentTitle(value);
         }
@@ -62,11 +62,19 @@ const App = () => {
         }
     }, [message, currentTitle])
 
-    console.log(previousChats);
+    useEffect(() => {
+        return () => {
+            fetch('/reset', { method: 'GET' })
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+        };
+    }, []);
+
+    //console.log(previousChats);
 
     const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle);
     const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)));
-    console.log(uniqueTitles);
+    //console.log(uniqueTitles);
 
   return (
       <div className="app">
