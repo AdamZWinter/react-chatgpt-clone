@@ -124,7 +124,7 @@ useEffect(() => {
         {!currentTitle && <h1>ChatGPT-Faux</h1>}
         {!currentTitle && <h1>Please choose a lesson plan.</h1>}
         {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
-        {!currentTitle && <h3 className="lessons" >Philosphy: Trancendentalism vs Romanticism</h3>}
+        {!currentTitle && <h3 className="lessons" >Philosophy: Troranscendentalism vs Romanticism</h3>}
         {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
         <ul className="feed">
         {currentChat?.map((chatMessage, index) => (
