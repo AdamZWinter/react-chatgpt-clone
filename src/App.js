@@ -64,6 +64,18 @@ const App = () => {
     };
 }, []);
 
+const sendApiRequest = async () => {
+  try {
+    const response = await fetch('/reset', {
+      method: 'POST',
+      // Include necessary headers and request payload
+    });
+    // Handle the response as needed
+  } catch (error) {
+    console.error('Error sending API request:', error);
+  }
+};
+
 useEffect(() => {
     const handleBeforeUnload = async () => {
       await sendApiRequest();
@@ -82,17 +94,7 @@ useEffect(() => {
     };
   }, []);
 
-  const sendApiRequest = async () => {
-    try {
-      const response = await fetch('/reset', {
-        method: 'POST',
-        // Include necessary headers and request payload
-      });
-      // Handle the response as needed
-    } catch (error) {
-      console.error('Error sending API request:', error);
-    }
-  };
+
 
   console.log(previousChats);
 
@@ -124,8 +126,9 @@ useEffect(() => {
         {!currentTitle && <h1>ChatGPT-Faux</h1>}
         {!currentTitle && <h1>Please choose a lesson plan.</h1>}
         {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
-        {!currentTitle && <h3 className="lessons" >Philosophy: Troranscendentalism vs Romanticism</h3>}
+        {!currentTitle && <h3 className="lessons" >Philosophy: Trancendentalism vs Romanticism</h3>}
         {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
+
         <ul className="feed">
         {currentChat?.map((chatMessage, index) => (
           <li key={index} className={chatMessage.role}>  
@@ -141,11 +144,11 @@ useEffect(() => {
             <form
             
               onSubmit={async (e) => {
-              e.preventDefault(); // Prevent the default form submission
-              setIsLoading(true);
-              await getMessages(); // Call your submit function
-              setIsLoading(false);
-              }
+                e.preventDefault(); // Prevent the default form submission
+                setIsLoading(true);
+                await getMessages(); // Call your submit function
+                setIsLoading(false);
+                }
               }
             >
               <input
