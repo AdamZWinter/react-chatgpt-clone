@@ -119,6 +119,10 @@ useEffect(() => {
 
       <section className="main">
         {!currentTitle && <h1>ChatGPT-Faux</h1>}
+        {!currentTitle && <h1>Please choose a lesson plan.</h1>}
+        {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
+        {!currentTitle && <h3 className="lessons" >Philosphy: Trancendentalism vs Romanticism</h3>}
+        {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
         <ul className="feed">
           {currentChat?.map((chatMessage, index) => (
             <li key={index}>
@@ -130,13 +134,21 @@ useEffect(() => {
 
         <div className="bottom-section">
           <div className="input-container">
+          <form
+            onSubmit={(e) => {
+            e.preventDefault(); // Prevent the default form submission
+            getMessages(); // Call your submit function
+            }}
+          >
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
-            <div id="submit" onClick={getMessages}>
+            <button id="submit" type="submit" >
+             
               ➢
-            </div>
+            </button>
+            </form>
           </div>
           <p className="info">
             2Sigma React ChatGPT Clone. This app leverages OpenAI's API to interact with the GPT 3.5 Turbo Model.

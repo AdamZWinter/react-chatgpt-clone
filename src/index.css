@@ -87,8 +87,8 @@ input {
     background-color: rgba(255, 255, 255, 0.05);
     padding: 12px 15px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
-        rgba(0, 0, 0, 0.05) 0 -12px 30px,
+    box-shadow: 
+        
         rgba(0, 0, 0, 0.05) 0 4px 6px,
         rgba(0, 0, 0, 0.05) 0 12px 3px,
         rgba(0, 0, 0, 0.05) 0 -3px 5px;
@@ -100,32 +100,55 @@ input:focus {
 
 #submit {
     position: absolute;
-    bottom: 15px;
-    right: 0;
+    bottom: -4px;
+    right: -80px;
     cursor: pointer;
 }
 
 .feed {
-    overflow: hidden;
+    height: auto; /* Adjust as needed */
+    overflow-y: auto; /* Will add scrollbar if necessary */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content vertically */
+    justify-content: center; /* Center the content horizontally */
     width: 100%;
     padding: 0;
+   
 }
 
 .feed li {
-    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     background-color: #444654;
     width: 100%;
     padding: 20px;
     margin: 20px 0;
+    
+    
 }
+
+
 
 .feed p {
     color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
-    text-align: left;
+    
+   
 }
 
 .feed p.role {
     min-width: 100px;
+    
+}
+
+.lessons{
+    border: solid 1px black;
+    border-radius: 5px;
+    color: black;
+    padding:10px;
+    background-color:white;
+    
+    
 }
