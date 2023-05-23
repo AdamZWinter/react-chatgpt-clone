@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 
+
+
 const App = () => {
   const [value, setValue] = useState('');
   const [message, setMessage] = useState(null);
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const createNewChat = () => {
     setMessage(null);
@@ -124,30 +127,36 @@ useEffect(() => {
         {!currentTitle && <h3 className="lessons" >Philosphy: Trancendentalism vs Romanticism</h3>}
         {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
         <ul className="feed">
-          {currentChat?.map((chatMessage, index) => (
-            <li key={index}>
-              <p className="role">{chatMessage.role}</p>
-              <p>{chatMessage.content}</p>
-            </li>
-          ))}
+        {currentChat?.map((chatMessage, index) => (
+          <li key={index} className={chatMessage.role}>  
+            <p className="role">{chatMessage.role}</p>
+            <p>{chatMessage.content}</p>
+          </li>   
+        ))}
         </ul>
 
         <div className="bottom-section">
           <div className="input-container">
-          <form
-            onSubmit={(e) => {
-            e.preventDefault(); // Prevent the default form submission
-            getMessages(); // Call your submit function
-            }}
-          >
-            <input
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-            <button id="submit" type="submit" >
-             
-              ➢
-            </button>
+          
+            <form
+            
+              onSubmit={async (e) => {
+              e.preventDefault(); // Prevent the default form submission
+              setIsLoading(true);
+              await getMessages(); // Call your submit function
+              setIsLoading(false);
+              }
+              }
+            >
+              <input
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+
+              <button id="submit" type="submit" >
+              {isLoading ? "loading..." : "➢"}
+              </button>
+
             </form>
           </div>
           <p className="info">
