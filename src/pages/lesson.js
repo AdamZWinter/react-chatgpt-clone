@@ -1,14 +1,24 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 
 const Lesson = () => {
-  const [value, setValue] = useState('');
+    const [queryParameters] = useSearchParams();
+    const lesson = queryParameters.get("lesson");
+
+
+  const [value, setValue] = useState(lesson);
   const [message, setMessage] = useState(null);
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(()=>{
+    getMessages();
+  },[])
+
+//   getMessages();
 
   let navigate = useNavigate();
 
@@ -128,11 +138,12 @@ const Lesson = () => {
       </section>
 
       <section className="main">
-        {!currentTitle && <h1>ChatGPT-Faux</h1>}
+        <p>Lesson: {lesson}</p>
+        {/* {!currentTitle && <h1>ChatGPT-Faux</h1>}
         {!currentTitle && <h1>Please choose a lesson plan.</h1>}
         {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
         {!currentTitle && <h3 className="lessons" >Philosophy: Trancendentalism vs Romanticism</h3>}
-        {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
+        {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>} */}
 
         <ul className="feed">
         {currentChat?.map((chatMessage, index) => (
@@ -147,7 +158,6 @@ const Lesson = () => {
           <div className="input-container">
           
             <form
-            
               onSubmit={async (e) => {
                 e.preventDefault(); // Prevent the default form submission
                 setIsLoading(true);
@@ -157,6 +167,7 @@ const Lesson = () => {
               }
             >
               <input
+                class = "promptInput"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
