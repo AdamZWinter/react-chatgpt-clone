@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 const Lesson = () => {
@@ -9,10 +10,14 @@ const Lesson = () => {
   const [currentTitle, setCurrentTitle] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  let navigate = useNavigate();
+
   const createNewChat = () => {
-    setMessage(null);
-    setValue('');
-    setCurrentTitle(null);
+    let path = "/"; 
+    navigate(path);
+    //setMessage(null);
+    //setValue('');
+    //setCurrentTitle(null);
   };
 
   const handleClick = (uniqueTitle) => {
@@ -62,49 +67,49 @@ const Lesson = () => {
         .then(res => console.log(res))
         .catch(err => console.error(err));
     };
-}, []);
+    }, []);
 
-const sendApiRequest = async () => {
-  try {
-    const response = await fetch('/reset', {
-      method: 'POST',
-      // Include necessary headers and request payload
-    });
-    // Handle the response as needed
-  } catch (error) {
-    console.error('Error sending API request:', error);
-  }
-};
-
-useEffect(() => {
-    const handleBeforeUnload = async () => {
-      await sendApiRequest();
+    const sendApiRequest = async () => {
+    try {
+        const response = await fetch('/reset', {
+        method: 'POST',
+        // Include necessary headers and request payload
+        });
+        // Handle the response as needed
+    } catch (error) {
+        console.error('Error sending API request:', error);
+    }
     };
 
-    const handleUnload = async () => {
-      await sendApiRequest();
-    };
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+        await sendApiRequest();
+        };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('unload', handleUnload);
+        const handleUnload = async () => {
+        await sendApiRequest();
+        };
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('unload', handleUnload);
-    };
-  }, []);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('unload', handleUnload);
+
+        return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        window.removeEventListener('unload', handleUnload);
+        };
+    }, []);
 
 
 
-  console.log(previousChats);
+    console.log(previousChats);
 
-  const currentChat = previousChats.filter(
-    (previousChat) => previousChat.title === currentTitle
-  );
-  const uniqueTitles = Array.from(
-    new Set(previousChats.map((previousChat) => previousChat.title))
-  );
-  console.log(uniqueTitles);
+    const currentChat = previousChats.filter(
+        (previousChat) => previousChat.title === currentTitle
+    );
+    const uniqueTitles = Array.from(
+        new Set(previousChats.map((previousChat) => previousChat.title))
+    );
+    console.log(uniqueTitles);
 
   return (
     <div className="app">
