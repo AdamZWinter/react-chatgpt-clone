@@ -2,20 +2,40 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-
 const Lesson = () => {
     const [queryParameters] = useSearchParams();
     const lesson = queryParameters.get("lesson");
+    const initialized = useRef(false)
+
+  let lessonString = '';
+    if(lesson == "arrays"){
+        lessonString = "Two-Dimensional Arrays";
+    }
+    if(lesson == "civilwar"){
+        lessonString = "The History of the American Civil War";
+    }
+    if(lesson == "philosophy"){
+        lessonString = "Philosophy: Trancendentalism vs Romanticism";
+    }
+    if(lesson == "shakespeare"){
+        lessonString = "Shakespeare 101: Why do we still talk about William Shakespeare?";
+    }
+
+    const [value, setValue] = useState(lessonString);
 
 
-  const [value, setValue] = useState(lesson);
   const [message, setMessage] = useState(null);
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(()=>{
-    getMessages();
+    if (!initialized.current) {
+        initialized.current = true
+        setIsLoading(true);
+        getMessages(); // Call your submit function
+        setIsLoading(false);
+    }
   },[])
 
 //   getMessages();
@@ -139,6 +159,9 @@ const Lesson = () => {
 
       <section className="main">
         <p>Lesson: {lesson}</p>
+
+        {!currentTitle && <h1>Loading.......</h1>}
+
         {/* {!currentTitle && <h1>ChatGPT-Faux</h1>}
         {!currentTitle && <h1>Please choose a lesson plan.</h1>}
         {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
@@ -146,7 +169,7 @@ const Lesson = () => {
         {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>} */}
 
         <ul className="feed">
-        {currentChat?.map((chatMessage, index) => (
+        {currentChat?.slice(1).map((chatMessage, index) => (
           <li key={index} className={chatMessage.role}>  
             <p className="role">{chatMessage.role}</p>
             <p>{chatMessage.content}</p>
@@ -167,7 +190,7 @@ const Lesson = () => {
               }
             >
               <input
-                class = "promptInput"
+                className = "promptInput"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
