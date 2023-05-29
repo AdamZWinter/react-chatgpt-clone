@@ -8,16 +8,16 @@ const Lesson = () => {
     const initialized = useRef(false)
 
   let lessonString = '';
-    if(lesson == "arrays"){
+    if(lesson === "arrays"){
         lessonString = "Two-Dimensional Arrays";
     }
-    if(lesson == "civilwar"){
+    if(lesson === "civilwar"){
         lessonString = "The History of the American Civil War";
     }
-    if(lesson == "philosophy"){
+    if(lesson === "philosophy"){
         lessonString = "Philosophy: Trancendentalism vs Romanticism";
     }
-    if(lesson == "shakespeare"){
+    if(lesson === "shakespeare"){
         lessonString = "Shakespeare 101: Why do we still talk about William Shakespeare?";
     }
 
@@ -38,8 +38,6 @@ const Lesson = () => {
     }
   },[])
 
-//   getMessages();
-
   let navigate = useNavigate();
 
   const createNewChat = () => {
@@ -50,6 +48,8 @@ const Lesson = () => {
     //setCurrentTitle(null);
   };
 
+  //this was for when a new chat would be listed in the left column
+  //each new chat was a unique title
   const handleClick = (uniqueTitle) => {
     setCurrentTitle(uniqueTitle);
     setMessage(null);
@@ -88,6 +88,7 @@ const Lesson = () => {
         { title: currentTitle, role: "user", content: value },
         { title: currentTitle, role: message.role, content: message.content }
       ]);
+      setValue('');
     }
   }, [message, currentTitle]);
 
