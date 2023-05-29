@@ -83,6 +83,7 @@ const Lesson = () => {
       setCurrentTitle(value);
     }
     if (currentTitle && value && message) {
+        //message.content = message.content.replace(/(?:\r\n|\r|\n)/g, '<br>');  //this did not work
       setPreviousChats((prevChats) => [
         ...prevChats,
         { title: currentTitle, role: "user", content: value },
@@ -163,17 +164,11 @@ const Lesson = () => {
 
         {!currentTitle && <h1>Loading.......</h1>}
 
-        {/* {!currentTitle && <h1>ChatGPT-Faux</h1>}
-        {!currentTitle && <h1>Please choose a lesson plan.</h1>}
-        {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
-        {!currentTitle && <h3 className="lessons" >Philosophy: Trancendentalism vs Romanticism</h3>}
-        {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>} */}
-
         <ul className="feed">
         {currentChat?.slice(1).map((chatMessage, index) => (
           <li key={index} className={chatMessage.role}>  
             <p className="role">{chatMessage.role}</p>
-            <p>{chatMessage.content}</p>
+            <p className='chatResponse'>{chatMessage.content}</p>
           </li>   
         ))}
         </ul>
