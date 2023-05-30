@@ -10,6 +10,10 @@ body {
     padding: 0;
 }
 
+.chatResponse {
+    white-space: pre-wrap;
+}
+
 .app {
     background-color: #343541;
     display: flex;
@@ -149,8 +153,10 @@ input:focus {
     border: solid 1px black;
     border-radius: 5px;
     color: black;
-    padding:10px;
+    padding:5px;
     background-color:white;
-    
-    
+}
+
+.blackText{
+    color: black;
 }

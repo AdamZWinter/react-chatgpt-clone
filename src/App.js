@@ -1,5 +1,13 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route }
+    from 'react-router-dom';
+import { useState } from 'react';
+import Home from './pages/home';
+import Lesson from './pages/lesson';
+ 
+function App() {
 
+<<<<<<< HEAD
 
 
 const App = () => {
@@ -105,71 +113,18 @@ useEffect(() => {
     new Set(previousChats.map((previousChat) => previousChat.title))
   );
   //console.log(uniqueTitles);
+=======
+  const [lesson, setLesson] = useState('testLessonState');
+>>>>>>> 53ac49f6675599066a3a71eb1951af2a9e0402c3
 
   return (
-    <div className="app">
-      <section className="side-bar">
-        <button onClick={createNewChat}>+ New chat</button>
-        <ul className="history">
-          {uniqueTitles?.map((uniqueTitle, index) => (
-            <li key={index} onClick={() => handleClick(uniqueTitle)}>
-              {uniqueTitle}
-            </li>
-          ))}
-        </ul>
-        <nav>
-          <p>2Sigma ChatGPT Team</p>
-        </nav>
-      </section>
-
-      <section className="main">
-        {!currentTitle && <h1>ChatGPT-Faux</h1>}
-        {!currentTitle && <h1>Please choose a lesson plan.</h1>}
-        {!currentTitle && <h3 className="lessons" >The History of the American Cival War</h3>}
-        {!currentTitle && <h3 className="lessons" >Philosophy: Trancendentalism vs Romanticism</h3>}
-        {!currentTitle && <h3 className="lessons" >Shakespeare 101: Why do we still talk about William Shakespeare?</h3>}
-
-        <ul className="feed">
-        {currentChat?.map((chatMessage, index) => (
-          <li key={index} className={chatMessage.role}>  
-            <p className="role">{chatMessage.role}</p>
-            <p>{chatMessage.content}</p>
-          </li>   
-        ))}
-        </ul>
-
-        <div className="bottom-section">
-          <div className="input-container">
-          
-            <form
-            
-              onSubmit={async (e) => {
-                e.preventDefault(); // Prevent the default form submission
-                setIsLoading(true);
-                await getMessages(); // Call your submit function
-                setIsLoading(false);
-                }
-              }
-            >
-              <input
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-              />
-
-              <button id="submit" type="submit" >
-              {isLoading ? "loading..." : "➢"}
-              </button>
-
-            </form>
-          </div>
-          <p className="info">
-            2Sigma React ChatGPT Clone. This app leverages OpenAI's API to interact with the GPT 3.5 Turbo Model.
-            Your feedback will help us improve.
-          </p>
-        </div>
-      </section>
-    </div>
+      <Router>
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/lesson' element={<Lesson />} />
+          </Routes>
+      </Router>
   );
-};
-
+}
+ 
 export default App;
