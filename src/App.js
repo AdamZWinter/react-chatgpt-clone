@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route }
 import { useState } from 'react';
 import Home from './pages/home';
 import Lesson from './pages/lesson';
+import History from './pages/history';
  
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/lesson' element={<Lesson />} />
+            <Route exact path='/history' element={<History />} />
           </Routes>
       </Router>
   );
