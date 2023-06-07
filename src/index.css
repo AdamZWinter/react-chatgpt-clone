@@ -160,3 +160,7 @@ input:focus {
 .blackText{
     color: black;
 }
+
+#bottomli {
+    display: none;
+  }

@@ -6,6 +6,7 @@ const Lesson = () => {
     const [queryParameters] = useSearchParams();
     const lesson = queryParameters.get("lesson");
     const initialized = useRef(false)
+    //this.bottomli = React.createRef();
 
   let lessonString = '';
     if(lesson === "arrays"){
@@ -91,6 +92,9 @@ const Lesson = () => {
       ]);
       setValue('');
     }
+    const bottomlielement = document.querySelector('#bottomli');
+    //bottomlielement.scrollIntoView();
+    bottomlielement.scrollIntoView({ behavior: "smooth" });
   }, [message, currentTitle]);
 
   useEffect(() => {
@@ -171,7 +175,9 @@ const Lesson = () => {
             <p className='chatResponse'>{chatMessage.content}</p>
           </li>   
         ))}
+        <li id="bottomli"></li>
         </ul>
+
 
         <div className="bottom-section">
           <div className="input-container">
