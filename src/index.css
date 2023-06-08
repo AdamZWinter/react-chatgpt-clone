@@ -116,7 +116,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Aligns items to the left */
-    width: 100%;
+    width: 80%;
     padding: 0;
 }
 
@@ -126,7 +126,7 @@ input:focus {
     background: 
     linear-gradient(to right, #343541, #494b5c, #343541);
     display: flex;
-    width: 90%;  /* Decrease this to make the messages narrower */
+    width: 50%;  /* Decrease this to make the messages narrower */
     padding: 20px;
     margin: 20px auto;  /* This centers the messages horizontally */
     
@@ -135,7 +135,7 @@ input:focus {
 .feed li.user {  /* Assuming .user is the class for user messages */
     background: linear-gradient(to right, #343541, #343541, #343541);/* Same as .app background */
     display: inline-flex;
-    width: 90%;  /* Width determined by content */
+    width: 50%;  /* Width determined by content */
     padding: 10px;
     margin: 10px auto;  /* Horizontally centered */
 }
