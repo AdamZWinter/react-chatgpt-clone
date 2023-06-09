@@ -3,10 +3,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Lesson = () => {
+  const myRef = React.createRef();
     const [queryParameters] = useSearchParams();
     const lesson = queryParameters.get("lesson");
     const initialized = useRef(false)
-    //this.bottomli = React.createRef();
 
   let lessonString = '';
     if(lesson === "arrays"){
@@ -29,6 +29,12 @@ const Lesson = () => {
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(false);
+
+  useEffect(()=>{
+    myRef.current.scrollIntoView({ behavior: "smooth" });
+    //myRef.current.focus();
+  },[scrollPosition, message, isLoading, currentTitle])
 
   useEffect(()=>{
     if (!initialized.current) {
@@ -92,9 +98,6 @@ const Lesson = () => {
       ]);
       setValue('');
     }
-    const bottomlielement = document.querySelector('#bottomli');
-    //bottomlielement.scrollIntoView();
-    bottomlielement.scrollIntoView({ behavior: "smooth" });
   }, [message, currentTitle]);
 
   useEffect(() => {
@@ -117,27 +120,27 @@ const Lesson = () => {
     }
     };
 
-    useEffect(() => {
-        const handleBeforeUnload = async () => {
-        await sendApiRequest();
-        };
+  useEffect(() => {
+      const handleBeforeUnload = async () => {
+      await sendApiRequest();
+      };
 
-        const handleUnload = async () => {
-        await sendApiRequest();
-        };
+      const handleUnload = async () => {
+      await sendApiRequest();
+      };
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        window.addEventListener('unload', handleUnload);
+      window.addEventListener('beforeunload', handleBeforeUnload);
+      window.addEventListener('unload', handleUnload);
 
-        return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-        window.removeEventListener('unload', handleUnload);
-        };
+      return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
+      };
     }, []);
 
 
 
-    console.log(previousChats);
+    //console.log(previousChats);
 
     const currentChat = previousChats.filter(
         (previousChat) => previousChat.title === currentTitle
@@ -145,7 +148,11 @@ const Lesson = () => {
     const uniqueTitles = Array.from(
         new Set(previousChats.map((previousChat) => previousChat.title))
     );
-    console.log(uniqueTitles);
+    //console.log(uniqueTitles);
+    
+    const delay = ms => new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
 
   return (
     <div className="app">
@@ -175,7 +182,9 @@ const Lesson = () => {
             <p className='chatResponse'>{chatMessage.content}</p>
           </li>   
         ))}
-        <li id="bottomli"></li>
+        {/* <li autoFocus id="bottomli" ref={myRef}></li> */}
+        {/* <li id="bottomli">...</li> */}
+        <div autoFocus id="bottomli" ref={myRef}></div>
         </ul>
 
 
@@ -188,6 +197,9 @@ const Lesson = () => {
                 setIsLoading(true);
                 await getMessages(); // Call your submit function
                 setIsLoading(false);
+                //setScrollPosition(true);
+                await delay(1000);
+                setScrollPosition(!scrollPosition);
                 }
               }
             >
