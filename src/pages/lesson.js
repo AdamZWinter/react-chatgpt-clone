@@ -198,7 +198,7 @@ const Lesson = () => {
                 await getMessages(); // Call your submit function
                 setIsLoading(false);
                 //setScrollPosition(true);
-                await delay(1000);
+                await delay(250);
                 setScrollPosition(!scrollPosition);
                 }
               }
