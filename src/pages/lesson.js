@@ -42,12 +42,19 @@ const Lesson = () => {
   let navigate = useNavigate();
 
   const createNewChat = () => {
-    let path = "/"; 
-    navigate(path);
-    //setMessage(null);
-    //setValue('');
-    //setCurrentTitle(null);
-  };
+    fetch('/reset', {
+        method: 'POST',
+    })
+    .then(() => {
+        // proceed with starting the new chat
+        let path = "/";
+        navigate(path);
+        // setMessage(null);
+        // setValue('');
+        // setCurrentTitle(null);
+    })
+    .catch(err => console.error(err));
+};
 
   //this was for when a new chat would be listed in the left column
   //each new chat was a unique title
@@ -135,7 +142,7 @@ const Lesson = () => {
         };
     }, []);
 
-
+    
 
     console.log(previousChats);
 
