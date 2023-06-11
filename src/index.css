@@ -162,5 +162,5 @@ input:focus {
 }
 
 #bottomli {
-    display: none;
+    display: block;
   }
