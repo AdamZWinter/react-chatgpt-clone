@@ -31,6 +31,8 @@ const Lesson = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(false);
 
+
+
   useEffect(()=>{
     myRef.current.scrollIntoView({ behavior: "smooth" });
     //myRef.current.focus();
@@ -55,11 +57,11 @@ const Lesson = () => {
         // proceed with starting the new chat
         let path = "/";
         navigate(path);
-        // setMessage(null);
-        // setValue('');
-        // setCurrentTitle(null);
+        // Reset the previousChats array
+        setPreviousChats([]);
     })
     .catch(err => console.error(err));
+ 
 };
 
   //this was for when a new chat would be listed in the left column
@@ -107,13 +109,7 @@ const Lesson = () => {
     }
   }, [message, currentTitle]);
 
-  useEffect(() => {
-    return () => {
-        fetch('/reset', { method: 'GET' })
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-    };
-    }, []);
+ 
 
     const sendApiRequest = async () => {
     try {
