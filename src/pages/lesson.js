@@ -36,7 +36,11 @@ const Lesson = () => {
     //myRef.current.focus();
   },[scrollPosition, message, isLoading, currentTitle])
 
-  useEffect(()=>{
+  useEffect( () => {
+      fetch('/api/reset', { method: 'GET' })
+      .then(res => console.log("Reset response: " + JSON.stringify(res))).then(console.log("Can use then twice?"))
+      .catch(err => console.error(err));
+    //sendApiRequest();
     if (!initialized.current) {
         initialized.current = true
         setIsLoading(true);
@@ -77,7 +81,7 @@ const Lesson = () => {
     try {
       const response = await fetch("/api/completions", options);
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       setMessage(data);
     } catch (error) {
       console.log("There was an error.");
@@ -100,25 +104,26 @@ const Lesson = () => {
     }
   }, [message, currentTitle]);
 
-  useEffect(() => {
-    return () => {
-        fetch('/reset', { method: 'GET' })
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-    };
-    }, []);
+  // useEffect(() => {
+  //   return () => {
+  //       fetch('/reset', { method: 'GET' })
+  //       .then(res => console.log(res))
+  //       .catch(err => console.error(err));
+  //   };
+  //   }, []);
 
-    const sendApiRequest = async () => {
-    try {
-        const response = await fetch('/reset', {
-        method: 'POST',
-        // Include necessary headers and request payload
-        });
-        // Handle the response as needed
-    } catch (error) {
-        console.error('Error sending API request:', error);
-    }
-    };
+  const sendApiRequest = async () => {
+  try {
+      const response = await fetch('/api/reset', {
+      method: 'POST',
+      // Include necessary headers and request payload
+      });
+      // Handle the response as needed
+      console.log("sendApiRequest function fired to reset.");
+  } catch (error) {
+      console.error('Error sending API request:', error);
+  }
+  };
 
   useEffect(() => {
       const handleBeforeUnload = async () => {
